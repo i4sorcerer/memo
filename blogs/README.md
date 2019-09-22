@@ -1,2 +1,2 @@
 # memo
-自己的memo记录
+自己的blogs memo记录
