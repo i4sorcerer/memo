@@ -1,0 +1,87 @@
+五，集合的处理
+4【强制】使用集合转数组的方法，必须使用集合的toArray(T[] array)，传入的类型是完全一样的，大小是list.size()
+	说明：使用这个带参方法，当传入参数分配空间不够大时，toArray方法将重新分配空间，并返回新地址。
+		  如果大于实际所需空间，下标为list.size的数据元素将会被设置为NULL，其他元素值保持不变，
+		  因此，最好将方法入参数据大小设置和list一致。
+5【强制】使用工具类，Arrays.asList方法把数据转换成集合时，不能使用修改集合的相关方法add,remove,clear方法否则会抛出UnsupportedOperation异常。
+	说明：asList实际上是List的一个内部类，并没有实现集合的修改方法。体现的是适配器模式，只是转换接口，后台仍然是数组。
+	例：String[] arrays = new Strinsg[] {"you", "win"};
+		List list = arrays.asList(arrays);
+		第一种情况：list.add("sd"); // 运行时异常
+		第二种情况：arrays[0] = "I" // list.get(0)的值也会被修改
+6【强制】泛型通配符<? extends T>来接收数据返回的数据，次写法的泛型集合不能使用add方法，而<? super T>不能使用get方法，作为接口调用赋值易出错。
+	说明：PECS原则：（Producer Extends Consumer Super）频繁往外读取的适用extends 经常插入的适用super
+★★7【强制】不要在foreach循环里进行元素的remove/add操作。remove元素请舒勇Iterator方式，如果是并发操作，需要对Iterator加锁。
+	说明：
+	反例:
+		public static void testListRemoveFail() {
+			List<String> arrayLst = new ArrayList<String>();
+			arrayLst.add("this ");
+			arrayLst.add("guide ");
+			for (String strItem : arrayLst){
+				if(strItem.equals("guide ")){
+					arrayLst.remove(strItem);
+				}
+			}
+			System.out.println(arrayLst);
+		}
+		Exception in thread "main" java.util.ConcurrentModificationException
+		at java.util.ArrayList$Itr.checkForComodification(ArrayList.java:859)
+		at java.util.ArrayList$Itr.next(ArrayList.java:831)
+		at com.gp.alibaba.guide.GuideMain.testListRemoveFail(GuideMain.java:29)
+		at com.gp.alibaba.guide.GuideMain.main(GuideMain.java:9)
+	
+	正例：
+		public static void testListRemoveSuccess() {
+		List<String> arrayLst = new ArrayList<String>();
+		arrayLst.add("this ");
+		arrayLst.add("is ");
+		arrayLst.add("alibaba ");
+		for (Iterator<String> iterator = arrayLst.iterator(); iterator.hasNext();) {
+			String strItem = (String) iterator.next();
+			if(strItem.equals("is ")){
+				iterator.remove();
+			}
+		}
+		System.out.println(arrayLst);
+		}
+		// 正常执行结束
+		
+8【推荐】集合初始化时，指定初始大小。
+	说明：HashMap使用HashMap(int initialCapacity)
+	initialCapacity =(元素需要个数/负载因子) + 1
+	负载因子默认是0.75
+	反例：如果需要放置1024个元素，由于没有设置初始用量大小，随着元素不断增加，
+		  容量七次被扩大，resize需要重建hash表，严重影响性能。
+	
+
+10【推荐】使用entrySet遍历Map类集合KV，而不是keySet方式进行遍历。
+	说明：keySet其实是遍历了两次，一次是生成iterator对象，另一次是从iterator中抽出key所对应的value。
+		而entrySet只是遍历了一次就把key和value方式entry中，效率更高。jdk8中可以直接使用Map.foreach方法
+	values返回的是v的集合，是list，keySet返回的是key的集合，是Set；entrySet返回的是K,V值组合对象。
+11【推荐】高度注意MAP类集合存储NULL的情况
+	集合类				key			value			super			说明
+	HashTable			not null	not null		Dictionary		线程安全
+	ConcurentHashMap	not null	not null		AbstractMap		锁分段技术（jdk8：cas）
+	TreeMap				not null	null			AbstractMap		线程不安全
+	HashMap				null		null			AbstractMap		线程不安全
+12【参考】合理利用好集合的有序性和稳定性，避免集合的无序性和不稳定性带来的负面影响。
+	说明：
+		有序性：是指遍历的结果是按照某种比较规则以此排列的。
+		稳定性：是指集合每次遍历的元素次序是一定的。
+		ArrayList是order/unsort
+		HashMap是unorder/unsort
+		TreeSet是order/sort
+13【参考】利用Set元素的唯一性，可以快速对一个元素进行去重，避免使用List的contains方法进行遍历，对比，去重操作。
+
+	
+
+	
+	
+			
+		
+		
+		
+		
+		
+		
