@@ -1,0 +1,32 @@
+https://github.com/userljw/taobao_1111
+
+
+netstat -ano|findstr "5037"
+
+tasklist |findstr "8900"
+
+taskkill /pid 8900 -t -f 
+
+tasklist |findstr "7240"
+
+
+[{'center': (540, 352), 'radius': 267}, {'center': (518, 271), 'radius': 270}, {
+'center': (889, 1605), 'radius': 98}, {'center': (889, 1418), 'radius': 98}, {'center': (889, 1231), 'radius': 98}, 
+{'center': (889, 1044), 'radius': 98}, {'center': (889, 856), 'radius': 98}, {'center': (889, 669), 'radius': 98}, 
+{'center': (893, 482), 'radius': 102}, {'center': (520, 224), 'radius': 98}]
+
+adb shell input tap 540 352
+adb shell input tap 518 271
+
+
+去分享:adb shell input tap 889 669
+去开卡:adb shell input tap 889 856
+
+去浏览1->adb shell input tap 889 1044
+去浏览2->聚划算:adb shell input tap 889 1231
+去浏览3->浏览双十一必备好货:adb shell input tap 889 1418
+去浏览4->阿里健康大药房:adb shell input tap 889 1605
+
+
+adb shell input tap 889 482
+adb shell input tap 889 224
