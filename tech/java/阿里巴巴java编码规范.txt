@@ -75,7 +75,35 @@
 13【参考】利用Set元素的唯一性，可以快速对一个元素进行去重，避免使用List的contains方法进行遍历，对比，去重操作。
 
 	
+六、并发处理
+10【强制】使用CountDownLatch进行异步转同步时，每个线程退出前必须调用countDown方法，线程执行代码注意catch异常，
+	确保countDown方法能够被执行，避免主线程无法执行await方法，知道超时才推出。
+	说明：子线程抛出的异常，不能被主线程try-catch到；
+11【推荐】避免Random示例被多线程使用，虽然共享实例是线程安全的，但是会因为竞争同一个seed资源导致性能下降。
+	说明：上述Random包括util.Random和Math.Random两个类
+	正例：jdk7之后可以直接使用API ThreadLocalRandom，jdk7前需要自己保证线程安全
+12【推荐】并发场景下，通过双重检查锁（double-checked locking）实现延迟初始化的优化问题隐患。
+	可参考（Double-Checked Locking Is Broken Declaration）推荐较为简单的一种，jdk5以上，将目标属性声明为volatile型。
+13【参考】volatile解决线程不可见问题。对于一写多读，可以解决线程安全问题，多写的情况下，无法保证线程安全。
+	count++的操作使用如下方式解决
+	jdk8:LongAdder对象，比AtomicLong性能要好，减少了乐观锁的重试次数。
+14【强制】HashMap在容量不够进行resize时，由于高并发可能出现死链，导致CPU飙升，
+	开发过程中可以使用其他数据结构，或者通过加锁保证安全。
+	-》其他数据结构？ConcurrentHashMap和HashMap有啥不一样？
+????15【参考】ThreadLocal无法解决贡献对象的更新问题，ThreadLocal建议使用static进行修饰。
+	这个变量是针对一个线程内所有操作共享的，所以设置为静态变量，所有此类示例共享次静态变量
+	在类第一次使用时装载，只分配一块儿空间，所有此类的对象都可以操纵这个对象（只要是线程内）。
+	
 
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 			
