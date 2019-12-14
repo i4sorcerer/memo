@@ -1,1 +1,20 @@
-spring彻底理解
+spring5源码分析
+
+##基于Annotation的依赖注入
+###主要通过AnnotationConfigApplicationContext实现
+包含如下几种方式：
+1.直接将注解BEAN注册到容器中
+2.通过扫描指定的包及其子包下的所有类
+
+
+注册直接BEAN定义类的基本步骤如下：
+1）需要使用注解元数据解析器解析注解BEAN中关于作用域的配置
+	使用AnnotationScopeMetadataResolver解析作用域元数据
+	
+	
+	
+2）使用AnnotationConfigUtils的processCommonDefinitionAnnotations方法处理注解BEAN中通用的注解
+3）使用AnnotationUtils的applyScopedProxyMode方式，创建对于作用域的代理对象
+4）通过BeanDefinitionUtils向容器注册BEAN
+
+
