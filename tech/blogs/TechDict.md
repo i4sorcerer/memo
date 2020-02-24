@@ -33,11 +33,16 @@ Fail-Over的含义为“失效转移”，是一种备份操作模式，当主�
 - 主要角色：服务提供方，服务消费方，注册中心，监控中心，服务运行容器
 - http://dubbo.apache.org/zh-cn/blog/dubbo-annotation.html
 
+### SPI
 
+- SPI 全称为 Service Provider Interface，是一种服务发现机制。
+
+- SPI 的本质是将接口实现类的全限定名配置在文件中，并由服务加载器读取配置文件，加载实现类。
+- 
 
 ### 负载均衡
 
-- F5硬件负载均衡
+- F5硬件负载均衡（什么是F5硬件负载均衡？其他常用的软件负载有哪些？）
 - 
 
 
