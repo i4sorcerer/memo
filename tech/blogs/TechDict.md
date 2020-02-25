@@ -59,6 +59,8 @@ You should have this
         </plugin>
     </plugins>
 </build>
+```
+
 only in those modules that you want to run, but not in parent pom.
 
 
