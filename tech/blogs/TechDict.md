@@ -1,4 +1,4 @@
-#  # TechDict(大全手册20200217)
+#  # TechDict(大全手册20200225)
 
 ### failover(作为常见容错机制之一)
 
@@ -45,6 +45,21 @@ Fail-Over的含义为“失效转移”，是一种备份操作模式，当主�
 - F5硬件负载均衡（什么是F5硬件负载均衡？其他常用的软件负载有哪些？）
 - 
 
+
+
+### 疑难杂症问题集
+1. mvn clean package 编译时候，出现以下错误信息 unable to find main class的话，原因可能是下面的plugin引入地方不正。
+You should have this
+```
+<build>
+    <plugins>
+        <plugin>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-maven-plugin</artifactId>
+        </plugin>
+    </plugins>
+</build>
+only in those modules that you want to run, but not in parent pom.
 
 
 
