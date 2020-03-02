@@ -27,8 +27,17 @@ Container	服务运行容器
 ## 主要协议分类
 1. dubbo协议
   Dubbo 缺省协议采用单一长连接和 NIO 异步通讯，适合于小数据量大并发的服务调用，以及服务消费者机器数远大于服务提供者机器数的情况。
-  
+  dubbo.service.protocol=dubbo  
 2. rmi协议
+dubbo.service.protocol=rmi
+3. hessian协议
+4. http协议
+5. webservice协议
+6. redis协议
+7. rest协议
+<dubbo:protocol name="rest" server="jetty"/>
+<dubbo:protocol name="rest" server="tomcat"/>
+<dubbo:protocol name="rest" server="netty"/>
 
 
 服务治理
