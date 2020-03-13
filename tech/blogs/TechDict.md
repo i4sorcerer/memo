@@ -66,5 +66,11 @@ You should have this
 only in those modules that you want to run, but not in parent pom.
 
 
+2. java 中获取地址
+https://www.jianshu.com/p/1c9714622a4f
+
+
+
+
 
 
