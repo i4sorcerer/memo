@@ -1,0 +1,31 @@
+## volatile变量的特性
+
+就是因为此种变量解决了下面2个问题，才使变量在一定程度上可以保证线程的并发安全性
+
+### 使用volatile变量最终效果
+
+1. 使变量对所有线程立即可见（V）
+2. 禁止指令重排序优化（O）
+
+### 解决线程不安全的三大特性
+
+1. 原子性（Atomicity）
+
+   synchronized满足
+
+2. 可见性（Visibility）
+
+   synchronized满足
+
+   volatile满足
+
+   final满足
+
+3. 有序性（Ordering）:线程内有序，线程见无序
+
+   synchronized满足
+
+   volatile满足
+
+
+
