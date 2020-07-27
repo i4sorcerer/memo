@@ -99,16 +99,22 @@ kafka1.0版本以后，默认使用的是异步方式发送，会有线程从发
 
 
 
+### 服务端参数
 
+1. log.dirs=/tmp/kafka-logs ： A comma separated list of directories under which to store log files
+
+2. **log.segment.bytes=1073741824** 
+
+   每个segment文件最大size，超过此size会创建创建新的segment文件
 
 ### **发送端参数**
 
 1. "acks"
-   - ProducerConfig.ACKS_CONFIG : "0" : 消息发送给broker后不需要确认（新能高，已丢失数据）
+   - ProducerConfig.ACKS_CONFIG : "0" : 消息发送给broker后不需要确认（性能高，易丢失数据）
    - ProducerConfig.ACKS_CONFIG : "1" ：消息发送给broker后只需leader节点确认完即可返回
    - ProducerConfig.ACKS_CONFIG : "-1"(all) ： 消息发送给broker后需要ISR中所有的replica节点确认后方可返回。（最完全，但也可能会数据丢失）
 
-2. "batch.size"
+2. "batch.size"：针对的是同一个分区的消息
 
    ```
    批量发送，（16k）,需要和下面的"linger.ms"参数配合使用
@@ -116,7 +122,7 @@ kafka1.0版本以后，默认使用的是异步方式发送，会有线程从发
    "The producer will attempt to batch records together into fewer requests whenever multiple records are being sent to the same partition. This helps performance on both the client and the server. This configuration controls the default batch size in bytes. <p>No attempt will be made to batch records larger than this size. <p>Requests sent to brokers will contain multiple batches, one for each partition with data available to be sent. <p>A small batch size will make batching less common and may reduce throughput (a batch size of zero will disable batching entirely). A very large batch size may use memory a bit more wastefully as we will always allocate a buffer of the specified batch size in anticipation of additional records.";
    ```
 
-3. "linger.ms"
+3. "linger.ms" ：逗留，徘徊，磨蹭
 
    ```
    延迟发送毫秒数，默认设置为0，和"batch.size"配合使用
@@ -136,12 +142,13 @@ kafka1.0版本以后，默认使用的是异步方式发送，会有线程从发
 1. "group.id"
 
 ```
-接收端最重要的参数
+接收端最重要的参数，消费组。
 "A unique string that identifies the consumer group this consumer belongs to. This property is required if the consumer uses either the group management functionality by using <code>subscribe(topic)</code> or the Kafka-based offset management strategy."
 ```
 
 - 同一消费组竞争关系，不能消费同一条消息
 - 不同消费组不存在竞争关系，可以消费相同消息
+- 同一个消费组内的消费者在协调者的统筹下一起消费订阅主题的所有分区
 
 2. "auto.offset.reset"
 
