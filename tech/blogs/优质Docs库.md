@@ -1,0 +1,24 @@
+## the importent docs url
+
+- [解决Springboot整合ActiveMQ发送和接收topic消息的问题](https://www.cnblogs.com/sjq0928/p/11371620.html)
+- [kafka apche home page](https://kafka.apache.org/)
+- [UML类图与类的关系详解](https://www.cnblogs.com/pangjianxin/p/7877868.html)
+- [tymleaf + spring tutorial home page](https://www.thymeleaf.org/doc/tutorials/3.0/thymeleafspring.html)
+- [Spring Boot で Thymeleaf 使い方メモ](https://qiita.com/opengl-8080/items/eb3bf3b5301bae398cc2)
+- [apache log4j layouts home page](https://logging.apache.org/log4j/2.x/manual/layouts.html)
+- [Logicbig quick, simple, easy and comprehensive tutorials.](https://www.logicbig.com/tutorials.html)
+- [redis cluster tutorial home page](https://redis.io/topics/cluster-tutorial)
+- [docs oracle java tutorial Streams ](https://docs.oracle.com/javase/tutorial/collections/streams/index.html)
+- [ラムダ式・Stream APIの理解のポイントは「型」](https://masatoshitada.hatenadiary.jp/entry/2015/02/09/190150)
+- [postgresql データ型フォーマッティング関数](https://www.postgresql.jp/document/7.3/user/functions-formatting.html)
+- [gitの使い方講座](https://git-manual.net/category/egit/)
+- [BeginnersBook.com – Tutorials For Beginners](https://beginnersbook.com/)
+- [Spring boot log4j2.xml example how to do in java](https://howtodoinjava.com/spring-boot2/logging/spring-boot-log4j2-config/)
+- [Raft understandable distributed consensus](http://thesecretlivesofdata.com/raft/)
+- [dubbo docs](http://dubbo.apache.org/zh-cn/docs/user/quick-start.html)
+- [GIT使用rebase和merge的正确姿势](https://blog.csdn.net/GarfieldEr007/article/details/85320260)
+- [jenkins user documentation](https://www.jenkins.io/doc/)
+- [Red Black Tree Visualization Animation](https://www.cs.usfca.edu/~galles/visualization/RedBlack.html)
+- [mozilla developer docs(js,html,css,api)](https://developer.mozilla.org/ja/docs/Web/API)
+- **[Spring boot docs 官方文档全版本](https://docs.spring.io/spring-boot/docs/)**
+- 
