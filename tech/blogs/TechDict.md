@@ -50,7 +50,9 @@ Fail-Over的含义为“失效转移”，是一种备份操作模式，当主�
 
 
 ### Callable和Runable的区别
-
+- Callable接口是call方法，需要返回值
+- Runable接口是run方法，没有返回值
+- 两者都可以再Executor框架中通过调用execute方法，或者submit方法来 提交到线程池中
 
 
 
