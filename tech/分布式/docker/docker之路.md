@@ -56,12 +56,20 @@ docker产生的背景
   - ADD 将宿主机中文件copy至容器，并可以自动解压压缩文件
     - 不安装其他软件zip文件自动解压不了，tar.gz可以自动解压
   - COPY  从宿主机复制文件到容器
-  - VOLUME  设置容器数据卷
+  - VOLUME  设置容器数据卷(将主机的数据卷或者文件挂载到容器中)
   - CMD 指定容器启动过程中需要执行的命令
     - 注意点：多条CMD命令，只哟经最后一条生效。
     - 会被docker run 后的参数替换 尽量少用
   - ENTRYPOINT 指定容器启动过程中需要执行的命令
     - 会把docker run 后的命令追加进来
+### [docker compose](https://www.runoob.com/docker/docker-compose.html)
+- Compose 是用于定义和运行多容器 Docker 应用程序的工具。通过 Compose，您可以使用 YML 文件来配置应用程序需要的所有服务。
+然后，使用一个命令，就可以从 YML 文件配置中创建并启动所有服务。
+
+- 使用docker compose的三个步骤
+1. 使用 Dockerfile 定义应用程序的环境。
+2. 使用 docker-compose.yml 定义构成应用程序的服务，这样它们可以在隔离环境中一起运行。
+3. 最后，执行 docker-compose up 命令来启动并运行整个应用程序。
 
 ### docker的网络
 
