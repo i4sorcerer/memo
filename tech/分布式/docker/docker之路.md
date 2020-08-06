@@ -80,3 +80,14 @@ docker产生的背景
 
 2. 多机方式
    - overlay network
+3. docker network管理
+   - 查看当前网卡列表 dcoker network ls
+   - 通过指定subnet方式创建。如果容器中需要指定特定的IP地址，则需要设定subnet。 docker network create --driver bridge --subnet 172.22.0.0/16 br17222
+   - 查看详细网卡信息 docker network inspect br17222
+   - 删除指定的网卡 docker network rm br17222
+4. 网络相关error
+   - user specified IP address is supported only when connecting to networks with user configured subnets
+   - Error response from daemon: Pool overlaps with other one on this address space
+   
+   
+   
