@@ -5,8 +5,8 @@
 Fail-Over的含义为“失效转移”，是一种备份操作模式，当主要组件异常时，其功能转移到备份组件。其要点在于有主有备，且主故障时备可启用，并设置为主。如Mysql的双Master模式，当正在使用的Master出现故障时，可以拿备Master做主使用
 
 ### DevOps
-
-
+- 它不是一种工具，DevOps其实要谈的是运维合一
+<img src="http://dockone.io/uploads/article/20200228/e50dcb4bfbe7012c608bba0450bfcd96.png" />
 
 ### 灰度发布（Gray Release）
 
@@ -16,17 +16,20 @@ Fail-Over的含义为“失效转移”，是一种备份操作模式，当主�
 
 - 云服务的后半场
 
-#### 持续交付Continuous Delivery
+### 持续交付Continuous Delivery
 - 实际上就是从以前大大步走，改为小步快跑
+
+### 微服务
+- 有HA（High Available）的需求需要微服务。
+- 有性能调校的需求（例如：图片的呈现或者搜寻）需要微服务。
+- 经常变更的需要微服务。
 
 ### Kubernetes(K8S)
 
 - 是实现云原生的中流砥柱
 - 
 
-### 应用容器化
-
-#### Docker
+### Docker
 
 
 
