@@ -62,6 +62,13 @@ docker产生的背景
     - 会被docker run 后的参数替换 尽量少用
   - ENTRYPOINT 指定容器启动过程中需要执行的命令
     - 会把docker run 后的命令追加进来
+
+### docker run
+   - 直接启动daemon方式 docker run --name some-zookeeper --restart always -d zookeeper
+   - 以交互方式启动zkCli.sh进行连接 docker run -it --rm --link some-zookeeper:zookeeper zookeeper zkCli.sh -server zookeeper
+   - 以交互方式启动zoo1容器的zkCli.sh docker exec -it zoo1 zkCli.sh
+
+
 ### [docker compose](https://www.runoob.com/docker/docker-compose.html)
 - Compose 是用于定义和运行多容器 Docker 应用程序的工具。通过 Compose，您可以使用 YML 文件来配置应用程序需要的所有服务。
 然后，使用一个命令，就可以从 YML 文件配置中创建并启动所有服务。
