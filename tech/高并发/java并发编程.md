@@ -115,7 +115,7 @@ public class SynDemo{
 
    偏向锁->轻量级锁->重量级锁，通过对象监视器机制实现的
 
-   支持重入，非公平锁
+   支持重入(比如synchronized关键字修饰的递归方法)，非公平锁
 
    - 自旋锁：避免频繁挂起唤醒而进行的优化
 
@@ -312,24 +312,101 @@ Colletion<Thread> getQueuedThreads();
 
 - LockSupport
 
-- ReentrantLock：重入锁，独占锁
+  - 提供了基本的操作线程的静态方法
+
+    park() : 阻塞当前线程
+
+    unpark(Thread thread) ：唤醒处于阻塞状态的线程
+
+- ReentrantLock：可重入锁，独占锁
+
 - ReentrantReadWriteLock：重入读写锁，读锁共享，写锁独占
+
+  - 特性
+
+  1. 公平性选择：支持公平和非公平两种，吞吐量还是非公平优于公平
+  2. 重进入：读线程获取读锁之后能够继续获取读锁，写线程获取写锁之后能够再次获取写锁，也能获取读锁
+  3. 降级性：遵循获取写锁，获取读锁，释放写锁，释放读锁顺序。写锁能够降级为读锁。
+
+  - 读写状态的设计
+
+  1. 一个32位int变量，高16位表示读状态，低16位表示写状态。
+  2. 写状态获取：S&0x0000FFFF（高位抹去），写状态自增：直接S+1就可以
+  3. 读状态获取：S>>>16位，读状态自增：S+(1<<<16)S加上1左移16位的值
+  4. 写锁的获取：
+     - 如果当前读锁存在，获取失败：为了保证写锁的操作对读锁可见
+     - 如果当前写锁存在，并且获取锁的线程不是当前线程，获取失败
+
+  5. 读锁的获取：
+
+     - 读状态保存的是所有线程读锁次数总和。
+     - 获取当前线程读锁次数方法getHoldCount，每个线程各自获取读锁的次数维护在ThreadLocal中。
+
+     ```java
+             /**
+              * ThreadLocal subclass. Easiest to explicitly define for sake
+              * of deserialization mechanics.
+              */
+             static final class ThreadLocalHoldCounter
+                 extends ThreadLocal<HoldCounter> {
+                 public HoldCounter initialValue() {
+                     return new HoldCounter();
+                 }
+             }
+             /**
+              * The number of reentrant read locks held by current thread.
+              * Initialized only in constructor and readObject.
+              * Removed whenever a thread's read hold count drops to 0.
+              */
+             private transient ThreadLocalHoldCounter readHolds;
+     ```
+
+  6. 锁降级
+
+     - 写锁降级为读锁。如果当前线程用有写锁，释放写锁，再拥有读锁，这个过程不是锁降级。降级指的是当前线程获得写锁，再获取读锁，释放写锁，再释放读锁的过程。
+
+     - 为什么第二次的读锁要获取？
+
+       如果不获取则不能保证数据的可见性，别的写线程更新的数据，对当前读线程不可见
+
+     - 为什么第一次的写锁不再最后释放呢？
+
+       写操作执行完后立即释放，可以最大限度的保证吞吐量，提高读的并发量。
 
 #### lock和Condition
 
-需要和Lock搭配一起使用
+##### 需要和Lock搭配一起使用
 
 - 本质上是提供的JDK层面的wait/notify工具，可以由程序去控制
 - 和synchronized和wait+notify没有太大区别，只不过这种方式是JVM层面提供的，无法自行控制lock和unlock
-- 
+
+##### Object的监视器方法实现(synchronized wait notify)/Condition(lock await signal)接口实现
+
+<img src=".\object-monitor-codition.png" alt="object-monitor-condition" style="zoom:80%;" />
+
+##### Condition的实现分析
+
+- 每个ConditionObject都市AQS的一个内部类
+- 每个conditionObject对象都包含一个等待队列，是实现等待/通知的关键
+- 和AQS共用节点结构AQS.Node
+- 等待队列是一个FIFO队列，拥有首节点firstWaiter和尾节点lastWaiter
+- 同步队列与等待队列
+
+<img src=".\同步队列与等待队列.png" alt="同步队列与等待队列" style="zoom:80%;" />
+
+- await过程
+
+<img src=".\condition的await过程.png" alt="condition的await过程" style="zoom:80%;" />
+
+- signal过程
+
+<img src=".\condition的signal过程.png" alt="condition的signal过程" style="zoom:80%;" />
 
 #### CountDownLatch
 
 是通过AQS实现的
 
 会比较经常使用的工具，计数倒计时
-
-
 
 
 

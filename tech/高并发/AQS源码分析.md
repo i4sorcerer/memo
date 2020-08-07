@@ -259,6 +259,9 @@ private void unparkSuccessor(Node node) {
 
 #### 获取共享状态的acquireShared方法
 
+- **tryAcquireShared方法返回值<0时表示同步状态获取失败，或当前资源数不足，需自旋等待**
+- **tryAcquireShared方法返回值>=0时表示同步状态获取成功，或当前资源数充足，不需自旋等待**
+
 ```java
 /**
  * Acquires in shared mode, ignoring interrupts.  Implemented by
@@ -319,5 +322,25 @@ private void doAcquireShared(int arg) {
 
 
 
+#### 共享同步状态释放releaseShared方法
 
+```java
+/**
+ * Releases in shared mode.  Implemented by unblocking one or more
+ * threads if {@link #tryReleaseShared} returns true.
+ *
+ * @param arg the release argument.  This value is conveyed to
+ *        {@link #tryReleaseShared} but is otherwise uninterpreted
+ *        and can represent anything you like.
+ * @return the value returned from {@link #tryReleaseShared}
+ */
+public final boolean releaseShared(int arg) {
+// 共享式释放的时候必须保证线程安全的更改同步状态（资源数）
+    if (tryReleaseShared(arg)) {
+        doReleaseShared();
+        return true;
+    }
+    return false;
+}
+```
 
