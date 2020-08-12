@@ -53,6 +53,9 @@ Fail-Over的含义为“失效转移”，是一种备份操作模式，当主�
 
 ### OSS存储
 
+### Iaas
+### Paas
+### Saas
 
 
 ### Callable和Runable的区别
