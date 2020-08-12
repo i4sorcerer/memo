@@ -53,10 +53,10 @@ Fail-Over的含义为“失效转移”，是一种备份操作模式，当主�
 
 ### OSS存储
 
-### Iaas
-### Paas
-### Saas
-
+### Iaas 基础架构即服务
+### Paas 平台即服务
+### Saas 软件即服务
+<img src="https://blogs.bmc.com/wp-content/uploads/2017/09/iaas-paas-saas-comparison-1024x759.jpg" />
 
 ### Callable和Runable的区别
 - Callable接口是call方法，需要返回值
