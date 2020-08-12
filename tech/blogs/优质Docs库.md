@@ -21,4 +21,4 @@
 - [Red Black Tree Visualization Animation](https://www.cs.usfca.edu/~galles/visualization/RedBlack.html)
 - [mozilla developer docs(js,html,css,api)](https://developer.mozilla.org/ja/docs/Web/API)
 - **[Spring boot docs 官方文档全版本](https://docs.spring.io/spring-boot/docs/)**
-- 
+- [Speaker Decker以最简单的图片形式讲解技术内容 @syobochim](https://speakerdeck.com/syobochim)
