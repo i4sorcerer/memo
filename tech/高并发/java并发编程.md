@@ -26,7 +26,7 @@ CPU高速缓存分类
 
 - L1 ： 处理器私有
 - L2 ：处理器私有
-- L3 ： 只有次级别的缓存是处理器间共享的。
+- L3 ： 只有此级别的缓存是处理器间共享的。
 
 对于多核心CPU，会出现缓存一致性问题，解决办法
 
@@ -69,13 +69,84 @@ a=a+2
 
 2. 如何保证可见性（lock指令）
    - #lock指令，缓存锁，强制CPU缓存失效
-3. 无法保证原子性
+3. 复合操作无法保证原子性，单个操作时原子性的
+
+#### 双重检查和延迟初始化
+
+##### 延迟初始化的解决方案一-》双重检查
+
+```java
+// 错误实例
+public class DoubleCheckedLocking { // 1
+private static Instance instance; // 2
+public static Instance getInstance() { // 3
+if (instance == null) { // 4:第一次检查
+synchronized (DoubleCheckedLocking.class) { // 5:加锁
+if (instance == null) // 6:第二次检查
+instance = new Instance(); // 7:问题的根源出在这里
+} // 8
+} // 9
+return instance; // 10
+} // 11
+}
+```
+
+- 根本原因是由于 instance = new Instance(); // 7:问题的根源出在这里，多线程环境下这里会发生2,3的指令重排序
+
+```java
+memory = allocate(); // 1：分配对象的内存空间
+ctorInstance(memory); // 2：初始化对象
+instance = memory; // 3：设置instance指向刚分配的内存地址
+```
+
+```java
+// 正确示例
+public class DoubleCheckedLocking { // 1
+private volatile static Instance instance; // 2将其定义为volatile变量，禁止指令的重排序
+public static Instance getInstance() { // 3
+if (instance == null) { // 4:第一次检查
+synchronized (DoubleCheckedLocking.class) { // 5:加锁
+if (instance == null) // 6:第二次检查
+instance = new Instance(); // 7:问题的根源出在这里
+} // 8
+} // 9
+return instance; // 10
+} // 11
+}
+```
+
+##### 延迟初始化的解决方案二-》基于类初始化
+
+JVM在类的初始化阶段（即在Class被加载后，且被线程使用之前），会执行类的初始化。在
+执行类的初始化期间，JVM会去获取一个锁。这个锁可以同步多个线程对同一个类的初始化。  
+
+```java
+public class InstanceFactory {
+	private static class InstanceHolder {
+		public static Instance instance = new Instance();
+	}
+    public static Instance getInstance() {
+		return InstanceHolder.instance ; // 这里将导致InstanceHolder类被初始化
+	}
+}
+```
+
+
+
+
 
 
 
 ### Synchronized实现原理
 
 解决了原子性，可见性，有序性
+
+volatile变量和synchronized内存语义上有相同的地方
+
+- volatile变量的读操作与synchronized的锁的获取有相同内存语义：使线程本地缓存失效，强制从主内存获取数据
+- volatile变量的写操作和synchronized的锁释放有相同的内存你语义：使本地缓存刷新到主内存
+
+
 
 Synchronized的锁作用域
 
