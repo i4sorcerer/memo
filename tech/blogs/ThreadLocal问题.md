@@ -2,7 +2,7 @@
 
 ### ThreadLocal问题
 
-Java中ThreadLocal是如何保证线程安全的
+Java中ThreadLocal是如何保证在多线程环境的线程安全的
 
 #### 结论
 
