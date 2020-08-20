@@ -6,11 +6,11 @@
 
 1. 新建topic
 
-   sh kafka-topics.sh --create --bootstrap-server localhost:9092 --replication-factor 1 --partitions 1 --topic test
+   sh kafka-topics.sh --create --bootstrap-server localhost:9092 --replication-factor 3 --partitions 3 --topic part-topic
 
 2. list当前topic
 
-   sh kafka-topics.sh --list --bootstrap-server localhost:9092
+   sh kafka-topics.sh --list --bootstrap-server 192.168.146.130:9092
 
 ### Producer发送消息
 
