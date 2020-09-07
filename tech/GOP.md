@@ -6,6 +6,13 @@
 
 
 
+#### java中存在静态代码块和构造代码块
+
+- **对象一建立就运行构造代码块了，而且优先于构造函数执行**
+- 
+
+
+
 
 
 ### maven dependencies decorated by optional or provided
@@ -20,8 +27,6 @@
 - <optional>true</optional> or <scope>provided</scope>
 - https://maven.apache.org/guides/introduction/introduction-to-optional-and-excludes-dependencies.html
 - https://issues.apache.org/jira/browse/MWAR-351
-
-
 
 ### java方法中如果包含死循环结果，则可以不必每个分支都包含return 语句
 
