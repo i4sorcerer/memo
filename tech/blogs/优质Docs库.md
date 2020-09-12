@@ -19,6 +19,7 @@
 - [GIT使用rebase和merge的正确姿势](https://blog.csdn.net/GarfieldEr007/article/details/85320260)
 - [jenkins user documentation](https://www.jenkins.io/doc/)
 - [Red Black Tree Visualization Animation](https://www.cs.usfca.edu/~galles/visualization/RedBlack.html)
+- [各种数据结构的可视化演示](https://www.cs.usfca.edu/~galles/visualization/Algorithms.html)
 - [mozilla developer docs(js,html,css,api)](https://developer.mozilla.org/ja/docs/Web/API)
 - **[Spring boot docs 官方文档全版本](https://docs.spring.io/spring-boot/docs/)**
 - [Speaker Decker以最简单的图片形式讲解技术内容 @syobochim](https://speakerdeck.com/syobochim)
