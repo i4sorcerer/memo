@@ -11,7 +11,11 @@
 - **对象一建立就运行构造代码块了，而且优先于构造函数执行**
 - 
 
+#### 流的自动关闭
 
+java7之后try(FileOutputStream out = new FileOutputStream("....")) catch(Exception e){}
+
+上述写法，流使用完了后会自动关闭
 
 
 

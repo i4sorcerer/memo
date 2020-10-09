@@ -457,7 +457,7 @@ Colletion<Thread> getQueuedThreads();
 
 ##### Condition的实现分析
 
-- 每个ConditionObject都市AQS的一个内部类
+- 每个ConditionObject都是AQS的一个内部类
 - 每个conditionObject对象都包含一个等待队列，是实现等待/通知的关键
 - 和AQS共用节点结构AQS.Node
 - 等待队列是一个FIFO队列，拥有首节点firstWaiter和尾节点lastWaiter
@@ -649,7 +649,7 @@ return new ThreadPoolExecutor(corePoolSize, Integer.MAX_VALUE, 0, NANOSECONDS,
   2. synchronized是自动加锁和释放锁，程序不可控制；lock可以控制何时加锁lock，释放锁unlock
   3. synchronized是非公平锁，lock可以自由选择使用公平锁或者非公平锁
 
-- ReentrantLock重入读写锁的使用？
+- ReentrantReadWriteLock重入读写锁的使用？
 
 - 在都多写少的场景下，读写锁的性能要好于排它锁。一般的锁都是排它锁
   1. 是共享锁，同一时刻可以存在多个锁。
